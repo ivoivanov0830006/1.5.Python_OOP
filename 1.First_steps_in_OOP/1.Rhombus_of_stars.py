@@ -54,3 +54,35 @@ def print_rhombus(n):
 
 n = int(input())
 print_rhombus(n)
+
+
+------------------------------------ Problem to resolve --------------------------------
+
+Create a program that reads a positive integer N as input and prints on the console a 1.Rhombus_of_stars 
+with size n.
+-------------------------------------- Example inputs ----------------------------------
+1	
+*
+--------
+2	 
+ *
+* *
+ *
+--------
+3	  
+  *
+ * *
+* * *
+ * *
+  *
+--------
+4	   
+   *
+  * *
+ * * *
+* * * *
+ * * *
+  * *
+   *
+
+"""
