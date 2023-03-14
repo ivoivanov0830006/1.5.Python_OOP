@@ -162,3 +162,44 @@ manager.lunch_break()
 manager.set_worker(Robot())
 manager.manage()
 manager.lunch_break()
+
+
+-------------------------------------------------------------------------------------
+Test Code Before:                                           Output Before:
+manager = Manager()                                         I'm normal worker. I'm working.
+manager.set_worker(Worker())                                Lunch break....(5 secs)
+manager.manage()                                            I'm super worker. I work very hard!
+manager.lunch_break()                                       Lunch break....(3 secs)
+                                                            I'm a robot. I'm working....
+manager.set_worker(SuperWorker())                           I don't need to eat....
+manager.manage()
+manager.lunch_break()
+
+manager.set_worker(Robot())
+manager.manage()
+manager.lunch_break()
+
+-------------------------------------------------------------------------------------
+Test Code After:                                            Output Before:
+work_manager = WorkManager()                                I'm normal worker. I'm working.
+break_manager = BreakManager()                              Lunch break....(5 secs)
+work_manager.set_worker(Worker())                           I'm super worker. I work very hard!
+break_manager.set_worker(Worker())                          Lunch break....(3 secs)
+work_manager.manage()                                       I'm a robot. I'm working....
+break_manager.lunch_break()
+
+work_manager.set_worker(SuperWorker())
+break_manager.set_worker(SuperWorker())
+work_manager.manage()
+break_manager.lunch_break()
+
+work_manager.set_worker(Robot())
+work_manager.manage()
+try:
+    break_manager.set_worker(Robot())
+    break_manager.lunch_break()
+except:
+    pass
+
+
+"""
