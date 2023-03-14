@@ -100,3 +100,30 @@ except AssertionError:
     print("manager fails to support super_worker....")
     
 -------------------------------------------------------------------------------------
+Test Code Before:                                           Output Before:
+worker = Worker()                                           I'm working!!
+manager = Manager()                                         manager fails to support super_worker....
+manager.set_worker(worker)
+manager.manage()
+
+super_worker = SuperWorker()
+try:
+    manager.set_worker(super_worker)
+except AssertionError:
+    print("manager fails to support super_worker....")
+-------------------------------------------------------------------------------------
+Test Code After:                                            Output Before:
+worker = Worker()                                           I'm working!!
+manager = Manager()                                         I work very hard!!!
+manager.set_worker(worker)
+manager.manage()
+
+super_worker = SuperWorker()
+try:
+    manager.set_worker(super_worker)
+    manager.manage()
+except AssertionError:
+    print("manager fails to support super_worker....")
+
+
+"""
