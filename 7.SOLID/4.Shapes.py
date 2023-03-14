@@ -50,3 +50,11 @@ shapes = [Rectangle(1, 6), Triangle(2, 3)]
 calculator = AreaCalculator(shapes)
 
 print("The total area is: ", calculator.total_area)
+
+
+"""
+------------------------------------ Problem to resolve --------------------------------
+
+You are provided with code containing class Rectangle and class AreaCalculator. Refactor the 
+code using the Open/Closed Principle so that the code is open for extension (adding more shapes) 
+but closed for modification.
