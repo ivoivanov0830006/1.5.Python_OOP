@@ -89,3 +89,31 @@ except AssertionError:
 
 
 -------------------------------------------------------------------------------------
+Test Code Before:                                                   Output Before:
+prisoner = Prisoner()                                               The prisoner trying to walk to north by 10 and east by -3.
+print("The prisoner trying to walk to north by 10 and east by -3.") The location of the prison: [3, 3]
+                                                                    The current position of the prisoner: [0, 13]
+try:
+    prisoner.walk_north(10)
+    prisoner.walk_east(-3)
+except:
+    pass
+
+print(f"The location of the prison: {prisoner.PRISON_LOCATION}")
+print(f"The current position of the prisoner: {prisoner.position}")
+
+-------------------------------------------------------------------------------------
+Test Code After:                                                    Output Before:
+prisoner = Prisoner()                                               The prisoner trying to walk to north by 10 and east by -3.
+print("The prisoner trying to walk to north by 10 and east by -3.") The location of the prison: (3, 3)
+                                                                    The current position of the prisoner: (3, 3)
+try:
+    prisoner.walk_north(10)
+    prisoner.walk_east(-3)
+except:
+    pass
+
+print(f"The location of the prison: {prisoner.PRISON_LOCATION}")
+print(f"The current position of the prisoner: {prisoner.position}")
+
+"""
