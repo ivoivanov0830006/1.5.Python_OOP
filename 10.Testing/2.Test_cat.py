@@ -40,3 +40,42 @@ class CatTest(TestCase):
 
 if __name__ == "__main__":
     main()
+
+    
+"""
+------------------------------------ Problem to resolve --------------------------------
+
+Create a class CatTests
+In judge you need to submit just the CatTests class, with the unitttest module imported.
+Create the following tests:
+•	# 1 #  Cat's size is increased after eating
+•	# 2 #  Cat is fed after eating
+•	# 3 #  Cat cannot eat if already fed, raises an error
+•	# 4 #  Cat cannot fall asleep if not fed, raises an error
+•	# 5 #  Cat is not sleepy after sleeping
+
+-------------------------------------- Example inputs ----------------------------------
+
+class Cat:
+
+    def __init__(self, name):
+        self.name = name
+        self.fed = False
+        self.sleepy = False
+        self.size = 0
+
+    def eat(self):
+        if self.fed:
+            raise Exception('Already fed.')
+
+        self.fed = True
+        self.sleepy = True
+        self.size += 1
+
+    def sleep(self):
+        if not self.fed:
+            raise Exception('Cannot sleep while hungry')
+
+        self.sleepy = False
+
+"""
