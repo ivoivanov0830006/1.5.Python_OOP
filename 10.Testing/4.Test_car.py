@@ -61,3 +61,110 @@ class TestCar(TestCase):
 
 if __name__ == "__main__":
     main()
+
+    
+"""
+------------------------------------ Problem to resolve --------------------------------
+
+You are provided with a class IntegerList. It should only store integers. The initial integers should
+be set by the constructor. They are stored as a list. IntegerList has a functionality to add, remove_index,
+get, insert, get the biggest number, and get the index of an element. Your task is to test the class.
+Note: You are not allowed to change the structure of the provided code.
+Constraints
+•	add operation, should add an element and returns the list.
+    *	If the element is not an integer, a ValueError is thrown
+•	remove_index operation removes the element on that index and returns it.
+    *	If the index is out of range, an IndexError is thrown
+•	__init__ should only take integers, and store them
+•	get should return the specific element
+    *	If the index is out of range, an IndexError is thrown
+•	insert
+    *	If the index is out of range, IndexError is thrown
+    *	If the element is not an integer, ValueError is thrown
+•	get_biggest
+•	get_index
+Hint: Do not forget to test the constructor
+
+-------------------------------------- Example inputs ----------------------------------
+
+class Car:
+    def __init__(self, make, model, fuel_consumption, fuel_capacity):
+        self.make = make
+        self.model = model
+        self.fuel_consumption = fuel_consumption
+        self.fuel_capacity = fuel_capacity
+        self.fuel_amount = 0
+
+    @property
+    def make(self):
+        return self.__make
+
+    @make.setter
+    def make(self, new_value):  # 1 #
+        if not new_value:
+            raise Exception("Make cannot be null or empty!")
+        self.__make = new_value
+
+    @property
+    def model(self):
+        return self.__model
+
+    @model.setter
+    def model(self, new_value):  # 2 #
+        if not new_value:
+            raise Exception("Model cannot be null or empty!")
+        self.__model = new_value
+
+    @property
+    def fuel_consumption(self):
+        return self.__fuel_consumption
+
+    @fuel_consumption.setter
+    def fuel_consumption(self, new_value):  # 3 #
+        if new_value <= 0:
+            raise Exception("Fuel consumption cannot be zero or negative!")
+        self.__fuel_consumption = new_value
+
+    @property
+    def fuel_capacity(self):
+        return self.__fuel_capacity
+
+    @fuel_capacity.setter
+    def fuel_capacity(self, new_value):  # 4 #
+        if new_value <= 0:
+            raise Exception("Fuel capacity cannot be zero or negative!")
+        self.__fuel_capacity = new_value
+
+    @property
+    def fuel_amount(self):
+        return self.__fuel_amount
+
+    @fuel_amount.setter
+    def fuel_amount(self, new_value):  # 5 #
+        if new_value < 0:
+            raise Exception("Fuel amount cannot be negative!")
+        self.__fuel_amount = new_value
+
+    def refuel(self, fuel):   # 6 #
+        if fuel <= 0:
+            raise Exception("Fuel amount cannot be zero or negative!")
+        self.__fuel_amount += fuel
+        if self.__fuel_amount > self.__fuel_capacity:   # 7 #
+            self.__fuel_amount = self.__fuel_capacity
+
+    def drive(self, distance):
+        needed = (distance / 100) * self.__fuel_consumption
+
+        if needed > self.__fuel_amount:   # 8 #
+            raise Exception("You don't have enough fuel to drive!")
+
+        self.__fuel_amount -= needed   # 9 #
+
+
+car = Car("a", "b", 1, 4)
+car.make = ""
+print(car)
+
+"""
+
+
