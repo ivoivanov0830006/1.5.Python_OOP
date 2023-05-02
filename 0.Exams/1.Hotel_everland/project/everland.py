@@ -23,3 +23,13 @@ class Everland:
                 result.append(f"{room.family_name} does not have enough budget and must leave the hotel.")
                 self.rooms.remove(room)
         return "\n".join(result)
+
+    def status(self):
+        result = []
+        total_people = 0
+        for room in self.rooms:
+            total_people += room.members_count
+        result.append(f'Total population: {total_people}')
+        for room in self.rooms:
+            result.append(str(room))
+        return '\n'.join(result)
