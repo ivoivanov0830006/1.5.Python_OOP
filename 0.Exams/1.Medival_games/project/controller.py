@@ -39,3 +39,57 @@ class Controller:
                 result.append(f"Player {player.name} does not have enough stamina.")
         if result:
             return "\n".join(result)
+
+################################################################################################
+
+    def add_player(self, *players):
+        result = []
+        for player in players:
+            if player not in self.players:
+                self.players.append(player)
+                result.append(f"{player.name}")
+        return f"Successfully added: {', '.join(result)}"
+
+    def add_supply(self, *supplies):
+        self.supplies.extend(supplies)
+
+    def sustain(self, player_name: str, sustenance_type: str):
+        player = self.__check_player_by_name(player_name)
+        if player.stamina == 100:
+            return f"{player.name} have enough stamina."
+        last_supply = self.__last_supply(sustenance_type)
+        if last_supply:
+            player._heal_player(last_supply)
+            return f"{player_name} sustained successfully with {last_supply.name}."
+
+    def duel(self, first_player_name: str, second_player_name: str):
+        first_player = self.__check_player_by_name(first_player_name)
+        second_player = self.__check_player_by_name(second_player_name)
+        result = self.__check_players_for_duel(first_player, second_player)
+        if result:
+            return result
+
+        if first_player < second_player:
+            return self.__attack(first_player, second_player)
+        else:
+            return self.__attack(second_player, first_player)
+
+    def next_day(self):
+        for player in self.players:
+            if player.stamina - (player.age * 2) < 0:
+                player.stamina = 0
+            else:
+                player.stamina -= (player.age * 2)
+        for player in self.players:
+            self.sustain(player.name, "Food")
+            self.sustain(player.name, "Drink")
+
+    def __str__(self):
+        result = []
+        for player in self.players:
+            result.append(player.__str__())
+        for supply in self.supplies:
+            result.append(supply.details())
+        return "\n".join(result)
+
+
