@@ -54,3 +54,34 @@ class MovieApp:
         for key, value in kwargs.items():  # key = attribute, value = new value
             setattr(movie, key, value)     # movie = object, key = attribute, value = new value
         return f"{username} successfully edited {movie.title} movie."
+
+    def delete_movie(self, username: str, movie):
+        if not self.__movie_is_added(movie.title):
+            raise Exception(f"The movie {movie.title} is not uploaded!")
+        elif not movie.owner.username == username:
+            raise Exception(f"{username} is not the owner of the movie {movie.title}!")
+        self.movies_collection.pop(self.movies_collection.index(movie))
+        for user in self.users_collection:
+            if user.username == username:
+                user.movies_owned.pop(user.movies_owned.index(movie))
+                return f"{username} successfully deleted {movie.title} movie."
+
+    def like_movie(self, username: str, movie):
+        if self.__movie_is_liked(username, movie.title):
+            raise Exception(f"{username} already liked the movie {movie.title}!")
+        elif username == movie.owner.username:  # ??????????????????????
+            raise Exception(f"{username} is the owner of the movie {movie.title}!")
+        movie.likes += 1
+        for user in self.users_collection:
+            if user.username == username:
+                user.movies_liked.append(movie)
+                return f"{username} liked {movie.title} movie."
+
+    def dislike_movie(self, username: str, movie):
+        if not self.__movie_is_liked(username, movie.title):
+            raise Exception(f"{username} has not liked the movie {movie.title}!")
+        movie.likes -= 1
+        for user in self.users_collection:
+            if user.username == username:
+                user.movies_liked.pop(user.movies_liked.index(movie))
+                return f"{username} disliked {movie.title} movie."
