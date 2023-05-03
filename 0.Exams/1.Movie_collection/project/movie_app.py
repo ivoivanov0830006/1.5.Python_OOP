@@ -85,3 +85,26 @@ class MovieApp:
             if user.username == username:
                 user.movies_liked.pop(user.movies_liked.index(movie))
                 return f"{username} disliked {movie.title} movie."
+
+    def display_movies(self):
+        if not self.movies_collection:
+            return "No movies found."
+        sorted_result = sorted(self.movies_collection, key=lambda x: (-x.year, x.title))
+        result = []
+        for movie in sorted_result:
+            result.append(movie.details())
+        return '\n'.join(result)
+
+    def __str__(self):
+        result = []
+        if self.users_collection:
+            result.append(f"All users: {', '.join(x.username for x in self.users_collection)}\n")
+        else:
+            result.append("All users: No users.\n")
+
+        if self.movies_collection:
+            result.append(f"All movies: {', '.join(x.title for x in self.movies_collection)}")
+        else:
+            result.append("All movies: No movies.")
+
+        return "".join(result)
