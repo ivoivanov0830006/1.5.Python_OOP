@@ -47,3 +47,24 @@ class System:
         for software in System._software:
             total += software.capacity_consumption
         return total
+
+    # ##################################################################################
+
+    @staticmethod
+    def register_power_hardware(name: str, capacity: int, memory: int):
+        new_power_hardware = PowerHardware(name, capacity, memory)
+        System._hardware.append(new_power_hardware)
+
+    @staticmethod
+    def register_heavy_hardware(name: str, capacity: int, memory: int):
+        new_heavy_hardware = HeavyHardware(name, capacity, memory)
+        System._hardware.append(new_heavy_hardware)
+
+    @staticmethod
+    def register_express_software(hardware_name: str, name: str, capacity_consumption: int, memory_consumption: int):
+        hardware = System.__find_hardware(hardware_name)
+        if not hardware:
+            return "Hardware does not exist"
+        new_software = ExpressSoftware(name, capacity_consumption, memory_consumption)
+        hardware.install(new_software)
+        System._software.append(new_software)
