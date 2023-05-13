@@ -100,3 +100,32 @@ class System:
                   f"Total Operational Memory: {System.__total_memory_software()} / {System.__total_memory_hardware()}",
                   f"Total Capacity Taken: {System.__total_capacity_software()} / {System.__total_capacity_hardware()}"]
         return "\n".join(result)
+
+    @staticmethod
+    def system_split():
+        result = []
+        for hardware in System._hardware:
+            all_software_components = []
+            total_express = 0
+            total_light = 0
+            total_software_memory = 0
+            total_software_capacity = 0
+            result.append(f"Hardware Component - {hardware.name}")
+            for software in hardware.software_components:
+                all_software_components.append(software.name)
+                total_software_memory += software.memory_consumption
+                total_software_capacity += software.capacity_consumption
+                if software.software_type == "Express":
+                    total_express += 1
+                if software.software_type == "Light":
+                    total_light += 1
+            result.append(f"Express Software Components: {total_express}")
+            result.append(f"Light Software Components: {total_light}")
+            result.append(f"Memory Usage: {total_software_memory} / {hardware.memory}")
+            result.append(f"Capacity Usage: {total_software_capacity} / {hardware.capacity}")
+            result.append(f"Type: {hardware.hardware_type}")
+            if all_software_components:
+                result.append(f"Software Components: {', '.join(all_software_components)}")
+            else:
+                result.append("Software Components: None")
+        return "\n".join(result)
