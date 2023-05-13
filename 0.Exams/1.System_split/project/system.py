@@ -68,3 +68,35 @@ class System:
         new_software = ExpressSoftware(name, capacity_consumption, memory_consumption)
         hardware.install(new_software)
         System._software.append(new_software)
+
+    @staticmethod
+    def register_light_software(hardware_name: str, name: str, capacity_consumption: int, memory_consumption: int):
+        hardware = System.__find_hardware(hardware_name)
+        if not hardware:
+            return "Hardware does not exist"
+        new_software = LightSoftware(name, capacity_consumption, memory_consumption)
+        hardware.install(new_software)
+        System._software.append(new_software)
+
+    @staticmethod
+    def release_software_component(hardware_name: str, software_name: str):
+        # hardware = next(filter(lambda x: x.name == hardware_name, System._hardware), None)
+        # software = next(filter(lambda x: x.name == software_name, System._software), None)
+        hardware = System.__find_hardware(hardware_name)
+        software = System.__find_software(software_name)
+        if not hardware or not software:
+            return "Some of the components do not exist"
+        hardware.uninstall(software)
+        System._software.remove(software)
+
+    @staticmethod
+    def analyze():
+        # total_memory_consumption_software = sum(x.memory_consumption for x in System._software)
+        # total_memory_consumption_hardware = sum(x.memory for x in System._hardware)
+        # total_capacity_consumption_soft = sum(x.capacity_consumption for x in System._software)
+        # total_capacity_consumption_hard = sum(x.capacity for x in System._hardware)
+        result = ["System Analysis", f"Hardware Components: {len(System._hardware)}",
+                  f"Software Components: {len(System._software)}",
+                  f"Total Operational Memory: {System.__total_memory_software()} / {System.__total_memory_hardware()}",
+                  f"Total Capacity Taken: {System.__total_capacity_software()} / {System.__total_capacity_hardware()}"]
+        return "\n".join(result)
